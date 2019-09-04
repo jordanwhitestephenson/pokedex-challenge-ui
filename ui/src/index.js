@@ -4,7 +4,6 @@ import { Router } from '@reach/router'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
-
 import HomeScreen from './screens/home'
 import PokemonScreen from './screens/pokemon'
 import * as S from './styled'

@@ -22,6 +22,7 @@ function renderInput(inputProps) {
 }
 
 function renderDropDown(inputProps) {
+  console.log(inputProps, 'inpiut')
   const options = [
     { value: "Poison", label: "Poison" },
     { value: "Water", label: "Water" },
@@ -30,8 +31,7 @@ function renderDropDown(inputProps) {
     { value: "Psychic", label: "Psychic" }
   ];
   const defaultOption = options[0];
-  const { InputProps, onChange, ref, value, suggestions, ...other  } = inputProps;
-  console.log(inputProps, 'ya')
+  const { InputProps, onChange, ref, suggestions, ...other  } = inputProps;
   return (
     <Dropdown
       options={options}
@@ -40,8 +40,8 @@ function renderDropDown(inputProps) {
         ...InputProps
       }}
       {...other}
-      onChange={e => e.value}
-      value={value}
+      // onChange={e => getSuggestions(e.value, {})}
+      value={defaultOption}
       placeholder="Select an option"
     />
   );
@@ -95,7 +95,7 @@ function getSuggestions(value, { showEmpty = false } = {}, suggestions) {
 
 let popperNode;
 
-export default function SearchBox({ suggestions, children }) {
+export default function Filter({ suggestions, children }) {
   const [value, setValue] = useState("");
 
 
@@ -127,7 +127,7 @@ export default function SearchBox({ suggestions, children }) {
       }) => {
         console.log(inputValue)
         const { onBlur, onFocus, onChange, ...inputProps } = getInputProps({
-          placeholder: "Search Pokémon...",
+          placeholder: "Search Pokémon..."
         })
 
         return (
@@ -148,9 +148,9 @@ export default function SearchBox({ suggestions, children }) {
                 InputProps: { onChange },
                 InputLabelProps: getLabelProps({ shrink: true }),
                 inputProps,
-                // ref: node => {
-                //   popperNode = node;
-                // }
+                ref: node => {
+                  popperNode = node;
+                }
               })}
 
               <Popper open={isOpen} anchorEl={popperNode}>
