@@ -1,3 +1,4 @@
+
 const { gql } = require('apollo-server')
 
 // The GraphQL schema
@@ -21,7 +22,6 @@ exports.typeDefs = gql`
     prev_evolution: [Pokemon!]
     next_evolution: [Pokemon!]
   }
-
   type Query {
     pokemonMany: [Pokemon!]!
     pokemonOne(id: ID!): Pokemon

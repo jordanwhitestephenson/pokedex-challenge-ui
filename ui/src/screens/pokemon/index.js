@@ -5,6 +5,7 @@ import { navigate } from '@reach/router'
 import { IconButton } from '@material-ui/core'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import Dropdown from "react-dropdown";
 import _ from 'lodash'
 
 import PokemonCard from '../../components/PokemonCard'
@@ -19,7 +20,7 @@ export default function PokemonScreen({ num }) {
         img
         weight
         height
-        type
+        typeç
         weaknesses
         egg
       }
