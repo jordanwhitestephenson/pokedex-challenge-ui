@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { navigate } from '@reach/router'
@@ -12,9 +12,12 @@ import PokemonCard from '../../components/PokemonCard'
 import * as S from './styled'
 
 export default function PokemonScreen({ num }) {
+   //bug fix to replace only the first padded 0's rather than all of them
+  //  prev pokemonOne(id: ${num.replace(/0/g, '')})
+  
   const { loading, error, data } = useQuery(gql`
     {
-      pokemonOne(id: ${num.replace(/0/g, '')}) {
+      pokemonOne(id: ${num.replace(/^0+/g, '')}) {
         num
         name
         img
@@ -26,12 +29,21 @@ export default function PokemonScreen({ num }) {
       }
     }
   `)
+
+
+
+  const pokemon = data.pokemonOne
+
+
   function navigatePrev() {
+    // navigate(_.padStart(parseInt(pokemon.num) - 1, 3, '0'))
     navigate(_.padStart(parseInt(pokemon.num) - 1, 3, '0'))
   }
   function navigateNext() {
+    // navigate(_.padStart(parseInt(pokemon.num) + 1, 3, '0'))
     navigate(_.padStart(parseInt(pokemon.num) + 1, 3, '0'))
   }
+
 
   if (loading)
     return (
@@ -45,7 +57,7 @@ export default function PokemonScreen({ num }) {
         <p>Error :(</p>
       </S.Container>
     )
-  const pokemon = data.pokemonOne
+
   return (
     <S.Container>
       <S.Link to="/">Back</S.Link>

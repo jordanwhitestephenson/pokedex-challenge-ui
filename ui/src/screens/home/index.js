@@ -52,6 +52,7 @@ export default function HomeScreen() {
         suggestions={data.pokemonMany.map(pokemon => ({
           label: pokemon.name,
           value: pokemon.num,
+          type : pokemon.type
         }))}
       >
         {searchValue => (
